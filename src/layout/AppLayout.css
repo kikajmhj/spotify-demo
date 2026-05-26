@@ -1,0 +1,153 @@
+.app-layout {
+  display: flex;
+  height: 100vh;
+  background-color: #000;
+  color: #fff;
+  padding: 8px;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.sidebar-nav {
+  background-color: #121212;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px;
+  color: #b3b3b3;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: color 0.2s ease;
+}
+
+.sidebar-nav-item:hover {
+  color: #fff;
+}
+
+.sidebar-nav-item.active {
+  color: #fff;
+}
+
+.sidebar-nav-item svg {
+  width: 24px;
+  height: 24px;
+}
+
+.sidebar-library {
+  background-color: #121212;
+  border-radius: 8px;
+  padding: 8px 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.library-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+}
+
+.library-title {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #b3b3b3;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.library-title:hover {
+  color: #fff;
+}
+
+.library-title svg {
+  width: 24px;
+  height: 24px;
+}
+
+.library-add-btn {
+  background: none;
+  border: none;
+  color: #1ed760;
+  font-size: 24px;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease;
+}
+
+.library-add-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.create-playlist-card {
+  background-color: #242424;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.create-playlist-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.create-playlist-desc {
+  font-size: 14px;
+  color: #fff;
+  margin: 0;
+}
+
+.create-playlist-btn {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 9999px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.create-playlist-btn:hover {
+  transform: scale(1.04);
+  background-color: #f0f0f0;
+}
+
+.main-content {
+  flex: 1;
+  background-color: #121212;
+  border-radius: 8px;
+  overflow-y: auto;
+  padding: 24px;
+}
