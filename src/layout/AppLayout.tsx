@@ -1,65 +1,84 @@
-import { NavLink, Outlet } from 'react-router';
-import './AppLayout.css';
+import {styled, Box, Typography} from "@mui/material";
 
-export const AppLayout = () => {
+import React from "react";
+import {NavLink,Outlet} from "react-router";
+
+
+import HomeIcon from '@mui/icons-material/Home';
+import SearchIcon from '@mui/icons-material/Search';
+
+const Layout = styled ("div") ({
+  display: 'flex',
+  height: '100vh',
+  padding: '8px',
+})
+
+const Sidebar = styled ("div")(({theme}) => ({
+  width: '331px',
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
+  [theme.breakpoints.down('sm')]: {
+    display: "none",
+  }
+}))
+
+const ContentBox = styled (Box) (({theme}) => ({
+  borderRadius: '8px',
+  backgroundColor: theme.palette.background.paper,
+  color: theme.palette.text.primary,
+  width: '100%',
+  padding: '8px',
+  marginBottom: '8px',
+  marginRight: '8px',
+}))
+
+const NavList = styled ("ul") ({
+  listStyle: 'none',
+  padding: 0,
+  margin: 0,
+});
+
+const StyledNavLink = styled(NavLink) (({theme}) => ({
+  textDecoration: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '20px',
+  color: theme.palette.text.secondary,
+  "&:hover": {
+    color: theme.palette.text.primary,
+  },
+  "&.active": {
+    color: theme.palette.text.primary,  
+  }
+}))
+
+const AppLayout = () => {
   return (
-    <div className="app-layout">
-      <aside className="sidebar">
-        <nav className="sidebar-nav">
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) =>
-              `sidebar-nav-item ${isActive ? 'active' : ''}`
-            }
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12.5 3.247a1 1 0 0 0-1 0L4 7.577V20h4.5v-6a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v6H20V7.577l-7.5-4.33zm-2-1.732a3 3 0 0 1 3 0l7.5 4.33a2 2 0 0 1 1 1.732V21a1 1 0 0 1-1 1h-6.5a1 1 0 0 1-1-1v-6h-3v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V7.577a2 2 0 0 1 1-1.732l7.5-4.33z" />
-            </svg>
-            홈
-          </NavLink>
+    <Layout>
+      <Sidebar>
+        <ContentBox> 
+          <NavList>
+            <StyledNavLink to= "/">
+              <HomeIcon />
+               <Typography variant="h2" fontWeight={700}>Home</Typography> 
+               home
+             </StyledNavLink>
+            <StyledNavLink to="/search">
+              <SearchIcon />
+               search
+              <Typography variant="h2" fontWeight={700}>Search</Typography>
+            </StyledNavLink>
+          </NavList>  
+        </ContentBox>
 
-          <NavLink
-            to="/search"
-            className={({ isActive }) =>
-              `sidebar-nav-item ${isActive ? 'active' : ''}`
-            }
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path d="M10.533 1.27893C5.35215 1.27893 1.12598 5.41887 1.12598 10.5579C1.12598 15.697 5.35215 19.8369 10.533 19.8369C12.767 19.8369 14.8235 19.0671 16.4402 17.7794L20.7929 22.132C21.1834 22.5226 21.8166 22.5226 22.2071 22.132C22.5976 21.7415 22.5976 21.1083 22.2071 20.7178L17.8634 16.3741C19.1616 14.7547 19.94 12.7454 19.94 10.5579C19.94 5.41887 15.7138 1.27893 10.533 1.27893ZM3.12598 10.5579C3.12598 6.5326 6.46531 3.27893 10.533 3.27893C14.6007 3.27893 17.94 6.5326 17.94 10.5579C17.94 14.5831 14.6007 17.8369 10.533 17.8369C6.46531 17.8369 3.12598 14.5831 3.12598 10.5579Z" />
-            </svg>
-            검색
-          </NavLink>
-        </nav>
-
-        <div className="sidebar-library">
-          <div className="library-header">
-            <div className="library-title">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M14.5 2.134a1 1 0 0 1 1 0l6 3.464a1 1 0 0 1 .5.866V21a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1V3a1 1 0 0 1 .5-.866zM16 4.732V20h4V7.041l-4-2.309zM3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zm6 0a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1z" />
-              </svg>
-              Your Library
-            </div>
-            <button type="button" className="library-add-btn" aria-label="Create playlist">
-              +
-            </button>
-          </div>
-
-          <div className="create-playlist-card">
-            <h3 className="create-playlist-title">
-              첫번째 플레이리스트를 만들어보세요.
-            </h3>
-            <p className="create-playlist-desc">It's easy, we'll help you</p>
-            <button type="button" className="create-playlist-btn">PlayList 추가</button>
-          </div>
-        </div>
-      </aside>
-
-      <main className="main-content">
-        <Outlet />
-      </main>
-    </div>
+      </Sidebar>
+      <Outlet />
+    </Layout>
   );
 };
+
+
+
 
 export default AppLayout;
