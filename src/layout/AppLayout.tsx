@@ -6,6 +6,8 @@ import {NavLink,Outlet} from "react-router";
 
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
+import LibraryHead from "../Components/LibraryHead";
+import Library from "../Components/Library";
 
 const Layout = styled ("div") ({
   display: 'flex',
@@ -61,16 +63,20 @@ const AppLayout = () => {
           <NavList>
             <StyledNavLink to= "/">
               <HomeIcon />
-               <Typography variant="h2" fontWeight={700}>Home</Typography> 
-               home
+               <Typography variant="h2" sx={{ fontWeight: 700 }}>Home</Typography>
              </StyledNavLink>
             <StyledNavLink to="/search">
               <SearchIcon />
-               search
-              <Typography variant="h2" fontWeight={700}>Search</Typography>
+              <Typography variant="h2" sx={{ fontWeight: 700 }}>Search</Typography>
             </StyledNavLink>
           </NavList>  
         </ContentBox>
+         <ContentBox sx={{ height: '100%'}}>
+          <LibraryHead />
+          <Library/>
+         </ContentBox> 
+
+
 
       </Sidebar>
       <Outlet />
