@@ -1,8 +1,9 @@
 import React from 'react';
+import NewReleases from './components/NewReleases';
 
 export const HomePage = () => {
   return (
-    <div> Home Page </div>
+    <div> <NewReleases/> </div>
   );
 };
 

@@ -6,8 +6,9 @@ import {NavLink,Outlet} from "react-router";
 
 import HomeIcon from '@mui/icons-material/Home';
 import SearchIcon from '@mui/icons-material/Search';
-import LibraryHead from "../Components/LibraryHead";
-import Library from "../Components/Library";
+import LibraryHead from "./Components/LibraryHead";
+import Library from "./Components/Library";
+import Navbar from "./Components/Navbar";
 
 const Layout = styled ("div") ({
   display: 'flex',
@@ -76,10 +77,11 @@ const AppLayout = () => {
           <Library/>
          </ContentBox> 
 
-
-
       </Sidebar>
-      <Outlet />
+      <ContentBox>
+        <Navbar />
+        <Outlet />
+      </ContentBox>
     </Layout>
   );
 };
