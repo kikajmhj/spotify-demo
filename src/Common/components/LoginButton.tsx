@@ -1,10 +1,10 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { getSpotifyAuthUrl } from "../../utils/auth";
+import { redirectToSpotifyAuth } from "../../apis/authApi";
 
 const LoginButton = () => {
   const login = () => {
-    getSpotifyAuthUrl();
+    redirectToSpotifyAuth();
   };
   return (
     <Button variant="contained" color="secondary" size="large" onClick={login}>
