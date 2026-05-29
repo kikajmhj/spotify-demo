@@ -11,10 +11,9 @@ const LoginButton = () => {
   const handleClick = () => {
     if (isLoggedIn) {
       clearTokens();
-      return;
+    } else {
+      redirectToSpotifyAuth();
     }
-
-    redirectToSpotifyAuth();
   };
 
   return (

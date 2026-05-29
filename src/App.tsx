@@ -4,7 +4,6 @@ import './App.css';
 
 import { Routes, Route } from "react-router";
 
-
 const AppLayout = React.lazy(() => import('./layout/AppLayout'));
 const HomePage = React.lazy(() => import('./pages/HomePage/HomePage'));
 const SearchPage = React.lazy(() => import('./pages/SearchPage/SearchPage'));
@@ -25,10 +24,10 @@ const CallbackPage = React.lazy(() => import('./pages/CallbackPage/CallbackPage'
 
 
 function App() {
-  
   return (
   <Suspense fallback={<div>Loading...</div>}> 
       <Routes>
+        <Route path="/callback" element={<CallbackPage />} />
 
         <Route path="/" element={<AppLayout/>}>
           <Route index element={<HomePage/>} />
@@ -37,9 +36,7 @@ function App() {
           <Route path="playlist/:id" element={<PlaylistDetailPage/>} />
           <Route path="/playlist" element={<PlaylistPage/>} />
         </Route>
-        <Route path="/callback" element={<CallbackPage/>} />
-
-
+        
       </Routes>
   </Suspense>
   );
