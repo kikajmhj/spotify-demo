@@ -27,7 +27,7 @@ function App() {
   return (
   <Suspense fallback={<div>Loading...</div>}> 
       <Routes>
-        <Route path="/callback" element={<CallbackPage />} />
+  
 
         <Route path="/" element={<AppLayout/>}>
           <Route index element={<HomePage/>} />
@@ -36,7 +36,8 @@ function App() {
           <Route path="playlist/:id" element={<PlaylistDetailPage/>} />
           <Route path="/playlist" element={<PlaylistPage/>} />
         </Route>
-        
+        <Route path="/callback" element={<CallbackPage />} />
+
       </Routes>
   </Suspense>
   );
