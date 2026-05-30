@@ -36,6 +36,7 @@ export const getSpotifyAuthUrl = async () => {
             code_challenge_method: 'S256',
             code_challenge: codeChallenge,
             redirect_uri: redirectUri,
+            show_dialog: 'true',   // ← 추가
         };
 
         authUrl.search = new URLSearchParams(Object.entries(params)).toString();

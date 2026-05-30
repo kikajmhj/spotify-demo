@@ -19,6 +19,7 @@ export interface AuthUrlParams {
   code_challenge_method: "S256";
   code_challenge: string;
   redirect_uri: string;
+  show_dialog: string; // 'true' or 'false'
 }
 
 export interface ExchangeTokenResponse {
