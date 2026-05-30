@@ -5,9 +5,6 @@ import React from "react";
 
 import LoginButton from "../../Common/components/LoginButton";
 import useGetCurrentUserProfile from "../../hooks/useGetCurrentUserProfile";
-import { useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
-
 
 import {
   Avatar,
@@ -41,29 +38,6 @@ const ProfileMenuItem = styled(MenuItem)({
 
 
 const Navbar = () => {
-
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const queryClient = useQueryClient();
-
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
-  const logout = () => {
-
-    localStorage.removeItem("access_token");
-    queryClient.removeQueries({
-      queryKey: ["current-user-profile"],
-    });
-    handleMenuClose();
-  };
-
-
   const { data: userProfile } = useGetCurrentUserProfile();
   return (
     <Box sx={{ display: "flex", 
