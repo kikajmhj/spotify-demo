@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('content') as HTMLElement
 );
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({retry:1});
 
 root.render(
   <React.StrictMode>

@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useRef } from 'react';
+import React, { Suspense, useEffect } from 'react';
 
 import './App.css';
 
@@ -31,15 +31,8 @@ let code = urlParams.get("code");
 let codeVerifier = localStorage.getItem("code_verifier");
 const { mutate: exchangeToken } = useExchangeToken();
 
-// code는 일회용이라 교환은 딱 한 번만 보내야 한다.
-// StrictMode(개발 모드)가 useEffect를 두 번 돌려도 중복 요청을 막는 가드.
-const hasExchanged = useRef(false);
-
 useEffect(() => {
-  if (code && codeVerifier && !hasExchanged.current) {
-    hasExchanged.current = true;
-    console.log("[EXCHANGE] code_verifier read:", codeVerifier);
-    console.log("[EXCHANGE] code             :", code);
+  if (code && codeVerifier) {
     exchangeToken({ code, codeVerifier });
   }
 }, [code, codeVerifier, exchangeToken]);

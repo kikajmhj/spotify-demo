@@ -1,6 +1,6 @@
 import axios from "axios";
-import { CLIENT_ID } from "../configs/authConfig";
-import { ExchangeTokenResponse, TokenResponse } from "../models/auth";
+import { CLIENT_ID, CLIENT_SECRET } from "../configs/authConfig";
+import { ClientCredentialTokenResponse, ExchangeTokenResponse, TokenResponse } from "../models/auth";
 import { generateCodeChallenge, generateCodeVerifier } from "../utils/pkce";
 import {
   consumeCodeVerifier,
@@ -12,6 +12,43 @@ import { REDIRECT_URI } from "../configs/commonConfig";
 const SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize";
 const SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token";
 const SCOPES = "user-read-private user-read-email";
+
+
+
+const encodedBase64 = (data: string): string => {
+  if (typeof window !== "undefined") {
+    return btoa(data);
+  } else {
+    return Buffer.from(data).toString("base64");
+  }
+};
+
+export const getClientCredentialToken =
+  async (): Promise<ClientCredentialTokenResponse> => {
+    try {
+      const body = new URLSearchParams({
+        grant_type: "client_credentials",
+      });
+      const response = await axios.post(
+        "https://accounts.spotify.com/api/token",
+        body,
+        {
+          headers: {
+            Authorization: `Basic ${encodedBase64(CLIENT_ID + ":" + CLIENT_SECRET)}`,
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        },
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error(`Fail to fetch client credential token`, {
+        cause: error,
+      });
+    }
+  };
+
+
+
 
 export const redirectToSpotifyAuth = async (): Promise<void> => {
   const verifier = generateCodeVerifier();
@@ -81,6 +118,8 @@ export const exchangeToken = async (code:string, codeVerifier:string): Promise<E
     if (!CLIENT_ID || !REDIRECT_URI) {
       throw new Error("Missing required parameters");
     }
+
+    console.log("REDIRECT_URI:", REDIRECT_URI);
     const body = new URLSearchParams({
       client_id: CLIENT_ID,
       grant_type: "authorization_code",
@@ -101,7 +140,18 @@ export const exchangeToken = async (code:string, codeVerifier:string): Promise<E
 
 
   } catch (error) {
+    if (axios.isAxiosError(error)) {
+      // Spotify가 준 진짜 에러 ({ error, error_description })를 그대로 출력
+      console.error(
+        "Token exchange failed:",
+        error.response?.status,
+        error.response?.data
+      );
+    } else {
+      console.error("Token exchange failed:", error);
+    }
     throw new Error("Failed to fetch token");
   }
 
 }  
+

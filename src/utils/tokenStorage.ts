@@ -1,4 +1,4 @@
-const ACCESS_TOKEN_KEY = "spotify_access_token";
+const ACCESS_TOKEN_KEY = "access_token";
 const REFRESH_TOKEN_KEY = "spotify_refresh_token";
 const EXPIRES_AT_KEY = "spotify_token_expires_at";
 const CODE_VERIFIER_KEY = "spotify_code_verifier";

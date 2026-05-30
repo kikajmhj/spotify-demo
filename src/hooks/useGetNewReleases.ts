@@ -1,17 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import { getNewReleases } from "../apis/albumApi";
-import useAccessToken from "./useAccessToken";
+import useClientCredentialToken from "./useClientCredentialToken";
 
 const useGetNewReleases = () => {
-  const accessToken = useAccessToken();
-
+  // const access_token = localStorage.getItem("access_token");
+  const clientCredentialToken = useClientCredentialToken();
   return useQuery({
     queryKey: ["new-releases"],
     queryFn: async () => {
-      if (!accessToken) throw new Error("Access token is not available");
-      return getNewReleases(accessToken);
+      if (!clientCredentialToken) {
+        throw new Error("No token available");
+      }
+      return getNewReleases(clientCredentialToken);
     },
-    enabled: !!accessToken,
   });
 };
 
