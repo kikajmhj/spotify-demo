@@ -5,9 +5,6 @@ import useGetCurrentUserPlaylists from "../../hooks/useGetCurrentUserPlaylist";
 
 import Playlist from "./Playlist";
 import EmptyPlaylist from "./EmptyPlaylist";
-import useGetCurrentUserProfile from "../../hooks/useGetCurrentUserProfile";
-import { useInView } from "react-intersection-observer";
-import LoadingSpinner from "../../Common/components/LoadingSpinner";
 
 
 const PlaylistContainer = styled("div")(({ theme }) => ({
@@ -24,41 +21,21 @@ const PlaylistContainer = styled("div")(({ theme }) => ({
   },
 }));
 const Library = () => {
-
-  const {ref, inView} = useInView();
-
-  const { data, isLoading, error, hasNextPage, isFetchingNextPage, fetchNextPage } = useGetCurrentUserPlaylists({
-    limit: 10,
+  const { data, isLoading, error } = useGetCurrentUserPlaylists({
+    limit: 15,
     offset: 0,
   });
-
-  const {data: user} = useGetCurrentUserProfile()
-
-  useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
-      fetchNextPage();
-    }
-  }, [inView])
-
-
-  if (!user) return <EmptyPlaylist />;
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>플레이리스트를 불러오지 못했습니다.</div>;
 
-
-  
-
   return (
     <div>
-      {!data || data?.pages[0].total === 0 ? (
+      {!data || data.total === 0 ? (
         <EmptyPlaylist />
       ) : (
         <PlaylistContainer>
-          {data.pages.map((page, index) => (
-            <Playlist playlists={page.items} key={index} />
-          ))}
-          <div ref={ref}> {isFetchingNextPage && <LoadingSpinner />} </div> 
+          <Playlist playlists={data.items} />
         </PlaylistContainer>
       )}
     </div>
