@@ -1,4 +1,4 @@
-import { GetCurrentPlaylistRequest, GetCurrentPlaylistResponse } from "../models/playlist";
+import { GetCurrentPlaylistRequest, GetCurrentPlaylistResponse, GetPlaylistRequest, Playlist } from "../models/playlist";
 import api from "../utils/api";
 
 
@@ -20,4 +20,15 @@ export const getCurrentPlaylist = async (
 
         throw error;
     }
+}
+
+export const getPlaylist = async (params: GetPlaylistRequest) : Promise<Playlist> => {
+    try {
+        const response = await api.get(`/playlists/${params.playlist_id}`, {
+            params,
+        });
+        return response.data;
+   }   catch (error) {
+        throw new Error("Failed to get playlist detail");
+   }
 }
