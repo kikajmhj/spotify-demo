@@ -5,3 +5,6 @@ const defaultRedirectUri =
 
 export const REDIRECT_URI =
   process.env.REACT_APP_REDIRECT_URI?.trim() || defaultRedirectUri;
+
+
+export const PAGE_LIMIT = 10;

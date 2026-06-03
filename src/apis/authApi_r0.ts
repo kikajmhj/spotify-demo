@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import { clientId, clientSecret } from '../configs/authConfig';
+import { CLIENT_ID, clientSecret } from '../configs/authConfig';
 import { ClientCredentialTokenResponse } from '../models/auth';
 
 const encodedBase64 = (data: string): string => {
