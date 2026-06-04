@@ -1,6 +1,9 @@
 import { Box, styled, Typography, Button } from "@mui/material";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import AddIcon from "@mui/icons-material/Add";
+import useCreatePlaylist from "../../hooks/useCreatePlaylist";
+import useGetCurrentUserProfile from "../../hooks/useGetCurrentUserProfile";
+import { getSpotifyAuthUrl } from "../../utils/auth";
 
 
 const Head = styled("div")({
@@ -12,7 +15,16 @@ const Head = styled("div")({
 });
 const LibraryHead = () => {
 
+  const {mutate: createPlaylist} = useCreatePlaylist();
+  const {data: userProfile} = useGetCurrentUserProfile();
+
   const handleCreatePlaylist = () => {
+    if (userProfile) {
+    createPlaylist({name: "나의 플레이 리스트"});
+  } else {
+    getSpotifyAuthUrl();
+  }
+    
      
   };
 

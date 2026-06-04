@@ -28,7 +28,7 @@ const Library = () => {
   const {ref, inView} = useInView();
 
   const { data, isLoading, error, hasNextPage, isFetchingNextPage, fetchNextPage } = useGetCurrentUserPlaylists({
-    limit: 10,
+    limit: 25,
     offset: 0,
   });
 

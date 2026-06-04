@@ -1,11 +1,17 @@
-import { useInfiniteQuery } from "@tanstack/react-query"
+import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query"
 import { getPlaylistItems } from "../apis/playlistApi";
-import { GetPlaylistItemsRequest } from "../models/playlist";
+import { ApiError, GetPlaylistItemsRequest, GetPlaylistItemsResponse } from "../models/playlist";
 
 
 const useGetPlaylistItems = (params: GetPlaylistItemsRequest) => {
 
-    return useInfiniteQuery ( {
+    return useInfiniteQuery<
+        GetPlaylistItemsResponse,
+        ApiError,
+        InfiniteData<GetPlaylistItemsResponse>,
+        (string | GetPlaylistItemsRequest)[],
+        number
+    >({
         queryKey: ['playlist-items', params],
         queryFn: async ({ pageParam }) => { 
             return getPlaylistItems({offset: pageParam, ...params});

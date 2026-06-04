@@ -10,9 +10,8 @@ import { PAGE_LIMIT } from '../../configs/commonConfig';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import LoadingSpinner from '../../Common/components/LoadingSpinner';
+import LoginButton from '../../Common/components/LoginButton_r0';
 import ErrorMessage from '../../Common/components/ErrorMessage';
-import LoginRequired from '../../Common/components/LoginRequired';
-import useAccessToken from '../../hooks/useAccessToken';
 
 const PlaylistHeader = styled(Grid)({
   display: "flex",
@@ -63,7 +62,7 @@ const PlaylistDetailPage = () => {
 
   const { id } = useParams<{ id: string }>();
 
-  if (id === undefined) return <Navigate to="/" />;
+  //if (id === undefined) return <Navigate to="/" />;
 
   const { data: playlist} = useGetPlaylist({ playlist_id: id });
 
@@ -79,8 +78,7 @@ const PlaylistDetailPage = () => {
     fetchNextPage,
   } = useGetPlaylistItems({ playlist_id: id, limit: PAGE_LIMIT });
 
-  const accessToken = useAccessToken();
-
+  
   const { ref, inView } = useInView();
 
   useEffect(() => {
@@ -97,16 +95,26 @@ const PlaylistDetailPage = () => {
     playlistItems?.pages.flatMap((page) => page.items ?? []) ?? [];
 
 
-  // 토큰이 없거나(로그아웃) 401 이면 로그인 화면을 보여준다
-  if (!accessToken || playlistItemsError?.status === 401) {
-    return <LoginRequired />;
-  }
 
-  // 그 외 진짜 로드 실패라면 fail to load
   if (playlistItemsError) {
-    return <ErrorMessage errorMessage="Failed to load" />;
+    if (playlistItemsError?.status === 401) { //로그인을 안해서 권한 없음 에러라면 로그인 버튼 
+      return (
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          height="100%"
+          flexDirection="column"
+        >
+          <Typography variant="h2" fontWeight={700} mb="20px">
+            다시 로그인 하세요
+          </Typography>
+          <LoginButton />
+        </Box>
+      );
+    }
+    return <ErrorMessage errorMessage="Failed to load" />; // 정말 리스트 가져오기 실패라면 fail to load 
   }
-
 
   return (
     <StyledTableContainer>

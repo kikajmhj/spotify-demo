@@ -77,3 +77,15 @@ export interface PlaylistTrack {
     item: Track | Episode;    
 }
 
+export interface ApiError {
+    status?: number;
+    message: string;
+}
+
+export interface CreatePlaylistRequest {
+    name: string;
+    playlistPublic?: boolean;
+    collaborative?: boolean;
+    description?: string;
+}
+

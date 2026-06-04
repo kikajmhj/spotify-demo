@@ -5,6 +5,7 @@ import React from "react";
 
 import LoginButton from "../../Common/components/LoginButton";
 import useGetCurrentUserProfile from "../../hooks/useGetCurrentUserProfile";
+import { clearTokens } from "../../utils/tokenStorage";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
@@ -56,10 +57,14 @@ const Navbar = () => {
 
   const logout = () => {
 
-    localStorage.removeItem("access_token");
+    clearTokens();
     queryClient.removeQueries({
       queryKey: ["current-user-profile"],
     });
+    queryClient.removeQueries({
+      queryKey: ["current-user-playlist"],
+    });
+
     handleMenuClose();
   };
 
