@@ -13,6 +13,7 @@ import LoadingSpinner from '../../Common/components/LoadingSpinner';
 import ErrorMessage from '../../Common/components/ErrorMessage';
 import LoginRequired from '../../Common/components/LoginRequired';
 import useAccessToken from '../../hooks/useAccessToken';
+import EmptyPlaylistWithSearch from './components/EmptyPlaylistWithSearch';
 
 const PlaylistHeader = styled(Grid)({
   display: "flex",
@@ -152,7 +153,7 @@ const PlaylistDetailPage = () => {
       </Grid>
     </PlaylistHeader>
     {playlist?.items?.total === 0 ? (
-      <Typography color="white"> 써치 </Typography>
+      <EmptyPlaylistWithSearch />
     ) : (
        <Table>
         <TableHead>
