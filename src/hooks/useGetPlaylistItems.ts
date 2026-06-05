@@ -13,9 +13,11 @@ const useGetPlaylistItems = (params: GetPlaylistItemsRequest) => {
         number
     >({
         queryKey: ['playlist-items', params],
-        queryFn: async ({ pageParam }) => { 
+        queryFn: async ({ pageParam }) => {
             return getPlaylistItems({offset: pageParam, ...params});
         },
+        // 토큰이 준비되기 전에 요청이 나가 401을 받는 race condition 방지
+        enabled: !!params.playlist_id && !!localStorage.getItem('access_token'),
         initialPageParam: 0,
         getNextPageParam: (lastPage) => {
             if (lastPage.next) {
