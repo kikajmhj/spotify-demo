@@ -40,7 +40,12 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-const EmptyPlaylistWithSearch = () => {
+interface EmptyPlaylistWithSearchProps {
+  playlist_id: string;
+}
+
+const EmptyPlaylistWithSearch = ({ playlist_id }: EmptyPlaylistWithSearchProps) => {
+
   const [keyword, setKeyword] = useState<string>("");
 
   const {
@@ -92,6 +97,7 @@ const EmptyPlaylistWithSearch = () => {
           <LoadingSpinner /> 
         ) : hasResults ? (
           <SearchResultList
+            playlist_id = {playlist_id}
             list={tracks}
             hasNextPage={hasNextPage}
             isFetchingNextPage={isFetchingNextPage}

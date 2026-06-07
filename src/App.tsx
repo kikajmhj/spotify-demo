@@ -41,6 +41,11 @@ useEffect(() => {
     console.log("[EXCHANGE] code_verifier read:", codeVerifier);
     console.log("[EXCHANGE] code             :", code);
     exchangeToken({ code, codeVerifier });
+
+
+    
+    localStorage.removeItem("code_verifier");
+    window.history.replaceState({}, "", window.location.pathname);
   }
 }, [code, codeVerifier, exchangeToken]);
 

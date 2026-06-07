@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import LoadingSpinner from "../../../Common/components/LoadingSpinner";
+import useAddItemToPlaylist from "../../../hooks/useAddItemToPlaylist";
 
 const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
   background: theme.palette.background.paper,
@@ -33,6 +34,7 @@ const AlbumImage = styled("img")({
 });
 
 interface SearchResultListProps { 
+  playlist_id: string;
   list: Track[];
   hasNextPage: boolean;
   isFetchingNextPage: boolean;
@@ -40,11 +42,26 @@ interface SearchResultListProps {
 }
 
 const SearchResultList = ({
+  playlist_id,
   list,
   hasNextPage,
   isFetchingNextPage,
   fetchNextPage,
 }: SearchResultListProps) => {
+
+  const { mutate: addItem } = useAddItemToPlaylist();
+
+  const handleAddItem = (track: Track) => {
+    
+    if (!track.uri) return;
+
+    console.log("track.id :", track.id);
+    console.log("track.uri:", track.uri);
+
+    addItem({ playlist_id: playlist_id, uris: [track.uri] });
+  };
+
+
   const { ref, inView } = useInView(); 
 
   useEffect(() => { 
@@ -73,7 +90,7 @@ const SearchResultList = ({
             </TableCell>
             <TableCell>{track.album?.name}</TableCell>
             <TableCell>
-              <Button>Add</Button>
+              <Button onClick={() => handleAddItem(track)}>Add</Button>
             </TableCell>
           </StyledTableRow>
         ))}

@@ -1,4 +1,4 @@
-export const SPOTIFY_BASE_URL = process.env.SPOTIFY_BASE_URL;
+export const SPOTIFY_BASE_URL = process.env.REACT_APP_SPOTIFY_BASE_URL;
 
 const defaultRedirectUri =
   typeof window !== "undefined" ? `${window.location.origin}/callback` : "";

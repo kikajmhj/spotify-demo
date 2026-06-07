@@ -90,3 +90,20 @@ export const createPlaylist = async (
 
 
 }
+
+
+export const addItemsToPlaylist = async (
+    playlist_id: string,
+    uris: string[]
+): Promise< {snapshot_id: string}> => {
+
+    try {
+        const response = await api.post(`/playlists/${playlist_id}/items`, {uris})
+        return response.data;
+
+    } catch (error) {
+       throw new Error("Failed to add item to playlist")
+    }
+
+
+}
