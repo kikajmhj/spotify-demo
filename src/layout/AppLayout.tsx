@@ -78,7 +78,7 @@ const AppLayout = () => {
          </ContentBox> 
 
       </Sidebar>
-      <ContentBox>
+      <ContentBox sx={{ overflowY: 'auto' }}>
         <Navbar />
         <Outlet />
       </ContentBox>

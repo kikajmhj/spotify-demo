@@ -1,4 +1,4 @@
-import { ExternalUrls } from "./commonType";
+import { ExternalUrls, Image } from "./commonType";
 
 
 export   interface     Artist {
@@ -8,4 +8,5 @@ export   interface     Artist {
             name?: string;
             type?: string;
             uri?: string;
+            images?: Image[];
         }
