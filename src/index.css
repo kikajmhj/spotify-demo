@@ -13,13 +13,10 @@ code {
 }
 
 
-*::-webkit-scrollbar:vertical {
-  width: 0;
-}
 
-
-*::-webkit-scrollbar:horizontal {
-  height: 8px;
+*::-webkit-scrollbar {
+  width: 0;     
+  height: 8px;  
 }
 *::-webkit-scrollbar-track {
   background: transparent;
