@@ -12,19 +12,35 @@ code {
     monospace;
 }
 
-/* 스크롤바 완전히 숨김 (스크롤 기능은 휠/트랙패드로 유지) */
+/* 스크롤바: 평소엔 투명(숨김), 마우스 올렸을 때만 살짝 보임 (Chrome/Edge/Safari) */
 *::-webkit-scrollbar {
-  width: 0;
-  height: 0;
+  width: 8px;
+  height: 8px;
 }
 *::-webkit-scrollbar-track {
   background: transparent;
 }
 *::-webkit-scrollbar-thumb {
+  background-color: transparent; /* 평소엔 안 보임 */
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+*::-webkit-scrollbar-corner {
   background: transparent;
 }
-/* Firefox / 구 Edge */
+/* 스크롤 영역에 hover 시에만 thumb 노출 */
+*:hover::-webkit-scrollbar-thumb {
+  background-color: #535353;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #6b6b6b; /* thumb 자체에 올리면 조금 더 밝게 */
+}
+
+/* Firefox */
 * {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent; /* 평소 숨김 */
+}
+*:hover {
+  scrollbar-color: #535353 transparent; /* hover 시 노출 */
 }
