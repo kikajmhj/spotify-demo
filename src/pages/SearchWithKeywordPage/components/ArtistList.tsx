@@ -32,6 +32,21 @@ const CircleImage = styled ('img') ({
     marginBottom: '12px',
 });
 
+// 이미지가 없는 아티스트용 대체 원형 (이름 첫 글자 표시)
+const CirclePlaceholder = styled (Box) ({
+    width: '128px',
+    height: '128px',
+    borderRadius: '50%',
+    marginBottom: '12px',
+    backgroundColor: '#282828',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '48px',
+    fontWeight: 700,
+    color: '#b3b3b3',
+});
+
 const Overlay = styled (Box) ({
     position: 'absolute',
     bottom: '70px',
@@ -48,7 +63,11 @@ const ArtistList = ({artists}: { artists: Artist[]}) => {
             {artists.map((artist) => (
                 <Cell key = {artist.id}>
                     <Box sx = {{ position: 'relatvie'}} >
-                        <CircleImage src= {artist.images?.[0].url} alt= {artist.name} />
+                        {artist.images?.[0]?.url ? (
+                            <CircleImage src= {artist.images[0].url} alt= {artist.name} />
+                        ) : (
+                            <CirclePlaceholder>{artist.name?.[0] ?? '?'}</CirclePlaceholder>
+                        )}
                         <Overlay className="overlay">
                             <PlayButton />
                         </Overlay>

@@ -32,6 +32,13 @@ const AlbumImage = styled("img")({
   borderRadius: "4px",
   marginRight: "12px",
 });
+const AlbumPlaceholder = styled("div")({
+  width: "40px",
+  height: "40px",
+  borderRadius: "4px",
+  marginRight: "12px",
+  backgroundColor: "#282828",
+});
 
 interface SearchResultListProps { 
   playlist_id: string;
@@ -78,7 +85,11 @@ const SearchResultList = ({
             <TableCell>
               <Box display="flex" alignItems="center">
                 <Box>
-                  <AlbumImage src={track.album?.images[0].url} width="40px" />
+                  {track.album?.images?.[0]?.url ? (
+                    <AlbumImage src={track.album.images[0].url} width="40px" />
+                  ) : (
+                    <AlbumPlaceholder />
+                  )}
                 </Box>
                 <Box>
                   <Typography fontWeight={700}>{track.name}</Typography>
