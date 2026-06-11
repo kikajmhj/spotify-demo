@@ -1,18 +1,18 @@
 import useGetNewReleases from "../../../hooks/useGetNewReleases";
-//import LoadingSpinner from "../../../Common/components/LoadingSpinner";
-//import ErrorMessage from "../../../Common/components/ErrorMessage";
+import LoadingSpinner from "../../../Common/components/LoadingSpinner";
+import ErrorMessage from "../../../Common/components/ErrorMessage";
 import { Typography, Grid } from "@mui/material";
 import Card from "../../../Common/components/Card";
 
 const NewReleases = () => {
   const { data, isLoading, error } = useGetNewReleases();
 
-  //if (isLoading) {
-  //  return <LoadingSpinner />;
-  //}
-  //if (error) {
-  //  return <ErrorMessage errorMessage={error.message} />;
-  //}
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+  if (error) {
+    return <ErrorMessage errorMessage={error.message} />;
+  }
   return (
     <div>
       <Typography variant="h1" sx={{ paddingTop: "8px" }}>
