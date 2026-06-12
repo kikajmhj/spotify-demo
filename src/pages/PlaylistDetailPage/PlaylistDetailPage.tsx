@@ -160,9 +160,15 @@ const PlaylistDetailPage = () => {
           <TableRow>
             <TableCell>#</TableCell>
             <TableCell>Title</TableCell>
-            <TableCell>Album</TableCell>
-            <TableCell>Date added</TableCell>
-            <TableCell>Duration</TableCell>
+            <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+              Album
+            </TableCell>
+            <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+              Date added
+            </TableCell>
+            <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+              Duration
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

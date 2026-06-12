@@ -37,13 +37,21 @@ const DesktopPlaylistItem = ({ item, index }: DesktopPlaylistItemProps) => {
         <StyledTableRow>
             <TableCell>{index}</TableCell>
             <TableCell>{item.item.name || "no name"}</TableCell>
-            <TableCell>
-                {isEpisode(item.item)
-                    ? "N/A" : item.item.album?.name }
+            <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+            {isEpisode(item.item) ? "N/A" : item.item.album?.name}
             </TableCell>
-            <TableCell>{dayjs(item.added_at).format('YYYY-MM-DD') || "Unknown"}</TableCell>
-            <TableCell>{item.item.duration_ms ? `${Math.floor(item.item.duration_ms / 60000)}:${Math.floor((item.item.duration_ms % 60000) / 1000).toString().padStart(2, '0')}` : "Unknown"}</TableCell> 
-
+            <TableCell sx={{ display: { xs: "none", md: "table-cell" } }}>
+            {dayjs(item.added_at).format("YYYY-MM-DD") || "Unknown"}
+            </TableCell>
+            <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
+            {item.item.duration_ms
+                ? `${Math.floor(item.item.duration_ms / 60000)}:${Math.floor(
+                    (item.item.duration_ms % 60000) / 1000
+                )
+                    .toString()
+                    .padStart(2, "0")}`
+                : "Unknown"}
+            </TableCell>
         </StyledTableRow>
 
     );

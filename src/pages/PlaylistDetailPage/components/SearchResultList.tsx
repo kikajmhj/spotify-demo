@@ -99,7 +99,9 @@ const SearchResultList = ({
                 </Box>
               </Box>
             </TableCell>
-            <TableCell>{track.album?.name}</TableCell>
+            <TableCell sx={{ display: { xs: "none", sm: "table-cell" } }}>
+               {track.album?.name}
+            </TableCell>
             <TableCell>
               <Button onClick={() => handleAddItem(track)}>Add</Button>
             </TableCell>

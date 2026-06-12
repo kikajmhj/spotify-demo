@@ -10,6 +10,8 @@ import LibraryHead from "./Components/LibraryHead";
 import Library from "./Components/Library";
 import Navbar from "./Components/Navbar";
 
+import MobileNav from "./Components/MobileNav";
+
 const Layout = styled ("div") ({
   display: 'flex',
   height: '100vh',
@@ -78,10 +80,12 @@ const AppLayout = () => {
          </ContentBox> 
 
       </Sidebar>
-      <ContentBox sx={{ overflowY: 'auto' }}>
+      <ContentBox sx={{ overflowY: 'auto', pb: { xs: "72px", sm: "8px" }, }}>
         <Navbar />
         <Outlet />
       </ContentBox>
+
+      <MobileNav />
     </Layout>
   );
 };
